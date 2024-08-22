@@ -7,7 +7,6 @@ transacao = 0
 LIMITE_TRANS_DIARIA = 10
 limite = 500
 
-excedeu_transacao = transacao >= LIMITE_TRANS_DIARIA
 data_hora_atual = datetime.today().replace(microsecond=0)
 ultima_data = data_hora_atual.date()
 
