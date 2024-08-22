@@ -6,13 +6,17 @@ def reset_trans(ultima_data, data_hora_atual, transacao):
     if data_hora_atual.date() != ultima_data:
         transacao = 0
         ultima_data = data_hora_atual.date()
-        return ultima_data, transacao
+    return ultima_data, transacao
 
 # cadastrar usuario e criar conta vinculando com o usuario
 def criar_usuario():
     pass
 def criar_conta():
     pass
+
+def mostrar_total(valor_em_conta):
+    print(f'\nTotal: {valor_em_conta:.2f}')
+    return valor_em_conta
 
 # funcao de deposito
 def deposito(valor, excedeu_transacao, valor_em_conta, extrato, transacao, data_hora_atual):
