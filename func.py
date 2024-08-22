@@ -15,6 +15,7 @@ def criar_conta():
 
 # funcao de deposito
 def deposito(valor, excedeu_transacao, valor_em_conta, extrato, transacao, data_hora_atual):
+    excedeu_transacao = transacao >= LIMITE_TRANS_DIARIA
     if excedeu_transacao:
         print("Nao foi possivel completar essa operacao: Limite de transacoes diarias excedido. (Max. 10)")
     elif valor > 0:
@@ -29,7 +30,8 @@ def deposito(valor, excedeu_transacao, valor_em_conta, extrato, transacao, data_
 def saque(valor, excedeu_transacao, valor_em_conta, extrato, transacao, data_hora_atual):
     excedeu_limite = valor > limite
     excedeu_valor = valor > valor_em_conta
-
+    excedeu_transacao = transacao >= LIMITE_TRANS_DIARIA
+    
     if excedeu_limite:
         print("Nao foi possivel completar essa operacao: Limite de valor excedido. (Max. 500)")
     elif excedeu_valor: 
