@@ -6,6 +6,7 @@ def reset_trans(ultima_data, data_hora_atual, transacao):
     if data_hora_atual.date() != ultima_data:
         transacao = 0
         ultima_data = data_hora_atual.date()
+        return ultima_data, transacao
 
 # cadastrar usuario e criar conta vinculando com o usuario
 def criar_usuario():
@@ -24,7 +25,7 @@ def deposito(valor, excedeu_transacao, valor_em_conta, extrato, transacao, data_
         transacao += 1
     else:
         print("Valor inválido.")
-    return valor_em_conta
+    return valor_em_conta, extrato, transacao
     
 # funcao de saque
 def saque(valor, excedeu_transacao, valor_em_conta, extrato, transacao, data_hora_atual):
@@ -44,7 +45,7 @@ def saque(valor, excedeu_transacao, valor_em_conta, extrato, transacao, data_hor
         extrato += f"Saque: R$ {valor:.2f} | {data_hora_atual}\n"
     else:
         print("valor inválido.")
-    return valor_em_conta
+    return valor_em_conta, extrato, transacao
     
 # funcao de mostrar extrato
 def mostrar_extrato(extrato):
