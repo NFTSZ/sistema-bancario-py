@@ -1,6 +1,5 @@
 from datetime import datetime
 
-# saque, deposito e extrato
 extrato = ''
 valor_em_conta = 0
 transacao = 0
@@ -8,21 +7,17 @@ transacao = 0
 LIMITE_TRANS_DIARIA = 10
 limite = 500
 
+excedeu_transacao = transacao >= LIMITE_TRANS_DIARIA
 data_hora_atual = datetime.today().replace(microsecond=0)
 ultima_data = data_hora_atual.date()
 
 while True:
-    # Capturando data e reiniciando limite de transacoes diarias
-    data_hora_atual = datetime.today().replace(microsecond=0)
-    if data_hora_atual.date() != ultima_data:
-        transacao = 0
-        ultima_data = data_hora_atual.date()
+    ultima_data, transacao = reset_trans(ultima_data, data_hora_atual, transacao)
 
-    print(f'\nTotal: {valor_em_conta:.2f}')
+    mostrar_total(valor_em_conta)
     print("[0] Sair [1] Deposito  [2] Saque  [3] Extrato")
     opcao_menu = int(input("Escolha uma opcao: "))
 
-    excedeu_transacao = transacao >= LIMITE_TRANS_DIARIA
     # Sair do programa
     if opcao_menu == 0:
         print("Volte sempre.")
@@ -31,45 +26,16 @@ while True:
     # Deposito
     elif opcao_menu == 1:
         valor = float(input("Valor a ser depositado: "))
-
-        if excedeu_transacao:
-            print("Nao foi possivel completar essa operacao: Limite de transacoes diarias excedido. (Max. 10)")
-
-        elif valor > 0:
-            valor_em_conta += valor
-            extrato += f'Deposito: R$ {valor:.2f} | {data_hora_atual}\n'
-            transacao += 1
-            
-        else:
-            print("Valor inválido.")
+        valor_em_conta, extrato, transacao = deposito(valor=valor, excedeu_transacao=excedeu_transacao, valor_em_conta=valor_em_conta, extrato=extrato, transacao=transacao, data_hora_atual=data_hora_atual)
     
     # Saque
     elif opcao_menu == 2:
         valor = float(input("Valor a ser sacado: "))
-
-        excedeu_limite = valor > limite
-        excedeu_valor = valor > valor_em_conta
-
-        if excedeu_limite:
-            print("Nao foi possivel completar essa operacao: Limite de valor excedido. (Max. 500)")
-
-        elif excedeu_valor: 
-            print("Nao foi possivel completar essa operacao: Saldo insuficiente")
-        
-        elif excedeu_transacao:
-            print("Nao foi possivel completar essa operacao: Limite de transacoes diarias excedido. (Max. 10)")
-
-        elif valor > 0:
-            valor_em_conta -= valor
-            transacao += 1
-            extrato += f"Saque: R$ {valor:.2f} | {data_hora_atual}\n"
-        
-        else:
-            print("valor inválido.")
+        valor_em_conta, extrato, transacao = saque(valor, excedeu_transacao, valor_em_conta, extrato, transacao, data_hora_atual)
 
     # Extrato
     elif opcao_menu == 3:
-        print("Nao foram feitas transacoes" if not extrato else extrato)
+        mostrar_extrato(extrato=extrato)
 
     else:
         print("Opção inválida.")
