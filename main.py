@@ -26,7 +26,7 @@ while True:
     # Deposito
     elif opcao_menu == 1:
         valor = float(input("Valor a ser depositado: "))
-        valor_em_conta, extrato, transacao = deposito(valor, excedeu_transacao, valor_em_conta, extrato, transacao, data_hora_atual)
+        valor_em_conta, extrato, transacao = deposito(valor=valor, excedeu_transacao=excedeu_transacao, valor_em_conta=valor_em_conta, extrato=extrato, transacao=transacao, data_hora_atual=data_hora_atual)
     
     # Saque
     elif opcao_menu == 2:
@@ -35,7 +35,7 @@ while True:
 
     # Extrato
     elif opcao_menu == 3:
-        mostrar_extrato(extrato)
+        mostrar_extrato(extrato=extrato)
 
     else:
         print("Opção inválida.")
