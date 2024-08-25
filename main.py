@@ -113,8 +113,9 @@ while True:
     # Deposito
     elif opcao_menu == 1:
         valor = float(input("Valor a ser depositado: "))
-        valor_em_conta, extrato, transacao = deposito(valor, excedeu_transacao, valor_em_conta, extrato, transacao, data_hora_atual)
-    
+        valor_em_conta, extrato, transacao = deposito(
+            valor, excedeu_transacao, valor_em_conta, extrato, transacao, data_hora_atual)
+
     # Saque
     elif opcao_menu == 2:
         valor = float(input("Valor a ser sacado: "))
@@ -123,7 +124,19 @@ while True:
 
     # Extrato
     elif opcao_menu == 3:
+        print("\n===============================")
         mostrar_extrato(extrato)
+        print("\n===============================")
+
+    elif opcao_menu == 4:
+        criar_usuario(usuarios)
+
+    elif opcao_menu == 5:
+        numero_conta = len(contas) + 1
+        conta = criar_conta(AGENCIA, numero_conta, usuarios)
+        
+        if conta:
+            contas.append(conta)
 
     else:
        print("Opção inválida.")
