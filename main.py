@@ -99,10 +99,19 @@ def criar_conta(agencia, numero_conta, usuarios):
 
     print("Usuario nao encontrado. Crie um usuario primeiro!")
 
+def listar_contas(contas):
+    for conta in contas:
+        print(f"""
+        Titular: {conta['usuario']['nome']}  
+        Agencia: {conta['agencia']}  
+        C/C: {conta['numero_conta']}""")
+        print("""
+        ="""* 100)
+
 while True:
     ultima_data, transacao = reset_trans(ultima_data, data_hora_atual, transacao)
     mostrar_total(valor_em_conta)
-    print("[0] Sair [1] Deposito  [2] Saque  [3] Extrato [4] Cadastrar usuario  [5] Criar conta")
+    print("[0] Sair  [1] Deposito  [2] Saque  [3] Extrato  [4] Cadastrar usuario  [5] Criar conta  [6] Listar contas")
     opcao_menu = int(input("Escolha uma opcao: "))
 
     # Sair do programa
@@ -137,6 +146,8 @@ while True:
         
         if conta:
             contas.append(conta)
+    elif opcao_menu == 6:
+        listar_contas(contas)
 
     else:
        print("Opção inválida.")
